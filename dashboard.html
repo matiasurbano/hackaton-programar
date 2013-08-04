@@ -89,7 +89,7 @@
     </div>
 
     <div id="grafico_div" class="container_grafico" style="display: none;"></div>
-
+    <a class="btn" id="volver">Volver &lt;&lt;</a>
   </div>
 
 
@@ -140,10 +140,11 @@ function initialize() {
 
   });
   layer.setMap(map);
+
+
   
   google.maps.event.addListener(layer, 'click', function(e){
-      console.log(getProvinciaValue(e));
-      console.log(hogarProvincia.getByField(getProvinciaValue(e), "h7", hogarProvincia.jurisdiccion));
+
       $('#nombreProvincia').text(getProvinciaValue(e));
       $('#datosSeleccion').show();
       $('#grafico_div').show();  
@@ -156,7 +157,25 @@ function initialize() {
       changeMap(prov_actual);
  });
 
+
+
+
 }
+
+ google.maps.event.addDomListener(document.getElementById('volver'), 'click', function() {
+    layer.setMap(null);
+    layer.setOptions({
+        query: {
+                select: 'geometry',
+                from: tableid
+               },
+    suppressInfoWindows:true
+
+  });
+  layer.setMap(map);
+  map.setZoom(4);
+
+  });
 
 function getProvinciaValue(e){ 
   return e.row.provincia.value;
@@ -197,11 +216,11 @@ function zoom2query(query) {
   //set the query using the parameter
   var queryText = encodeURIComponent(query);
   var query = new google.visualization.Query('http://www.google.com/fusiontables/gvizdata?tq='  + queryText);
-  console.log(query);
+
 
   //set the callback function
   query.send(zoomTo);
-  console.log("test");
+
 }
 
 function zoomTo(response) {
@@ -228,9 +247,8 @@ if (response.isError()) {
                 });
 
      geoXml.parseKmlString("<Placemark>"+kml+"</Placemark>");
-     console.log(kml);
+
      geoXml.docs[0].gpolygons[0].setMap(null);
-     console.log(geoXml.docs[0].gpolygons[0].bounds);
      map.fitBounds(geoXml.docs[0].gpolygons[0].bounds);
 
 
