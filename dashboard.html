@@ -4,6 +4,16 @@
   <head>
     <meta charset="utf-8">
     <title>Análisis geolocalizado de las TIC</title>
+    <style>
+            #map_canvas { 
+              width: 100%; height: 800px; 
+            }
+    
+          .container_joel{
+             margin-right: 500px;
+
+          }
+    </style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Mini and minimalist.">
     <meta name="author" content="Thomas Park">
@@ -35,8 +45,8 @@
 
   </head>
 
-  <body class="preview" id="top" data-spy="scroll" data-target=".subnav" data-offset="80">
-    <script src="../js/bsa.js"></script>
+  <body id="top" data-spy="scroll" data-target=".subnav" data-offset="80" onload="initialize();">
+
 
 
   <!-- Navbar
@@ -53,6 +63,7 @@
        <div class="nav-collapse collapse" id="main-menu">
         <ul class="nav" id="main-menu-left">
           <li><a onclick="pageTracker._link(this.href); return false;" href="http://news.bootswatch.com">Mapa</a></li>
+          <li><a onclick="pageTracker._link(this.href); return false;" href="http://news.bootswatch.com">Descargar App</a></li>
           
         </ul>
 
@@ -61,8 +72,9 @@
    </div>
  </div>
 
-    <div class="container">
-
+    <div class="container_joel">
+      <div id="map_canvas"></div>
+      <!--Load the AJAX API-->
 
 
 
@@ -82,9 +94,148 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="../js/jquery.smooth-scroll.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/bootswatch.js"></script>
+ 
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>        
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="http://geoxml3.googlecode.com/svn/branches/polys/geoxml3.js"></script>
+<script type="text/javascript">
+  google.load('visualization', '1', {'packages':['corechart', 'table', 'geomap']});
+var map;
+
+var layer;
+var tableid =  "14iHz800h6FbXgdQOzqcYrIvTHMoHUV2nZsmq1rM"; //1265695;
+
+
+
+function initialize() {
+    geocoder = new google.maps.Geocoder();
+    map = new google.maps.Map(document.getElementById('map_canvas'), {
+    center: new google.maps.LatLng(-38.416097, -63.616672),
+    zoom: 4,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  });
+  
+  layer = new google.maps.FusionTablesLayer();
+    layer.setOptions({
+        query: {
+                select: 'geometry',
+                from: tableid
+               },
+    suppressInfoWindows:true
+
+  });
+  layer.setMap(map);
+  
+  google.maps.event.addListener(layer, 'click', function(e){
+      console.log(e);
+
+  });
+
+}
+     
+{
+
+function changeMap() {
+  var searchString = document.getElementById('searchString').value.replace("'", "\\'");
+  if(searchString == "") {
+    //var query="SELECT 'geometry' FROM " + tableid;
+  } else {
+    var query="SELECT 'geometry' FROM " + tableid + " WHERE name = '" + searchString + "'";
+
+  layer.setOptions({
+    query: {
+            select: 'geometry',
+            from: tableid,
+            where:" name = '" + searchString + "'"
+           }
+
+    });
+    
+      
+  }
+
+  layer.setMap(map);
+  zoom2query(query);
+
+}
+
+function changeMap2() {
+  var searchString2 = document.getElementById('searchString2').value.replace("'", "\\'");
+  if(searchString2 == "") {
+    var query="SELECT 'geometry' FROM " + tableid2;
+  } else {
+    var query="SELECT 'geometry' FROM " + tableid2 + " WHERE 'name' = '" + searchString2 + "'";
+  }
+  //layer2.setQuery(query);
+  zoom2query(query);
+  
+}
+
+}
+
+
+  var infowindow = new google.maps.InfoWindow();
+    
+
+
+function zoom2query(query) {
+// zoom and center map on query results
+  //set the query using the parameter
+  var queryText = encodeURIComponent(query);
+  var query = new google.visualization.Query('http://www.google.com/fusiontables/gvizdata?tq='  + queryText);
+  console.log(query);
+
+  //set the callback function
+  query.send(zoomTo);
+  console.log("test");
+}
+
+function zoomTo(response) {
+if (!response) {
+  alert('no response');
+  return;
+}
+if (response.isError()) {
+  alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+  return;
+} 
+  FTresponse = response;
+  //for more information on the response object, see the documentation
+  //http://code.google.com/apis/visualization/documentation/reference.html#QueryResponse
+  numRows = response.getDataTable().getNumberOfRows();
+  numCols = response.getDataTable().getNumberOfColumns();
+  
+     var kml =  FTresponse.getDataTable().getValue(0,0);
+     // create a geoXml3 parser for the click handlers
+     var geoXml = new geoXML3.parser({
+                    map: map,
+        zoom: false
+                });
+
+     geoXml.parseKmlString("<Placemark>"+kml+"</Placemark>");
+     //console.log(kml);
+     geoXml.docs[0].gpolygons[0].setMap(null);
+     console.log(geoXml.docs[0].gpolygons[0].bounds);
+     map.fitBounds(geoXml.docs[0].gpolygons[0].bounds);
+
+
+ /* var bounds = new google.maps.LatLngBounds();
+  for(i = 0; i < numRows; i++) {
+      var point = new google.maps.LatLng(
+          parseFloat(response.getDataTable().getValue(i, 0)),
+          parseFloat(response.getDataTable().getValue(i, 1)));
+      bounds.extend(point);
+  }
+  // zoom to the bounds
+  map.fitBounds(bounds);*/
+
+}
+
+
+
+        </script>
+
+
 
 
   </body>
