@@ -32,7 +32,9 @@ var hogarProvincia = {
       "h11_10" : 0,
       "h11_11" : 3227,
       "h11_12" : 2825,
-      "h11_13" : 32907
+      "h11_13" : 32907,
+      "usa_pc_si" : 8175974,
+      "usa_pc_total" : 14701279
     },
     {
       "jurisdiccion" : "Catamarca",
@@ -66,7 +68,9 @@ var hogarProvincia = {
       "h11_10" : 0,
       "h11_11" : 85,
       "h11_12" : 0,
-      "h11_13" : 616
+      "h11_13" : 616,
+      "usa_pc_si" : 152433,
+      "usa_pc_total" : 343225
     },
     {
       "jurisdiccion" : "Chaco",
@@ -100,7 +104,9 @@ var hogarProvincia = {
       "h11_10" : 0,
       "h11_11" : 0,
       "h11_12" : 0,
-      "h11_13" : 477
+      "h11_13" : 477,
+      "usa_pc_si" : 392954,
+      "usa_pc_total" : 1039878
     },
     {
       "jurisdiccion" : "Chubut",
@@ -134,7 +140,9 @@ var hogarProvincia = {
       "h11_10" : 337,
       "h11_11" : 79,
       "h11_12" : 570,
-      "h11_13" : 549
+      "h11_13" : 549,
+      "usa_pc_si" : 298488,
+      "usa_pc_total" : 470944
     },
     {
       "jurisdiccion" : "Ciudad de Buenos Aires",
@@ -168,7 +176,9 @@ var hogarProvincia = {
       "h11_10" : 0,
       "h11_11" : 0,
       "h11_12" : 0,
-      "h11_13" : 10575
+      "h11_13" : 10575,
+      "usa_pc_si" : 2016683,
+      "usa_pc_total" : 2727786
     },
     {
       "jurisdiccion" : "Cordoba",
@@ -202,7 +212,9 @@ var hogarProvincia = {
       "h11_10" : 1170,
       "h11_11" : 4545,
       "h11_12" : 2011,
-      "h11_13" : 4451
+      "h11_13" : 4451,
+      "usa_pc_si" : 1737948,
+      "usa_pc_total" : 3100841
     },
     {
       "jurisdiccion" : "Corrientes",
@@ -236,7 +248,9 @@ var hogarProvincia = {
       "h11_10" : 0,
       "h11_11" : 0,
       "h11_12" : 294,
-      "h11_13" : 2865
+      "h11_13" : 2865,
+      "usa_pc_si" : 406977,
+      "usa_pc_total" : 931438
     },
     {
       "jurisdiccion" : "Entre Rios",
@@ -270,7 +284,9 @@ var hogarProvincia = {
       "h11_10" : 0,
       "h11_11" : 459,
       "h11_12" : 0,
-      "h11_13" : 2163
+      "h11_13" : 2163,
+      "usa_pc_si" : 580279,
+      "usa_pc_total" : 1162455
     },
     {
       "jurisdiccion" : "Formosa",
@@ -304,7 +320,9 @@ var hogarProvincia = {
       "h11_10" : 127,
       "h11_11" : 0,
       "h11_12" : 94,
-      "h11_13" : 416
+      "h11_13" : 416,
+      "usa_pc_si" : 166446,
+      "usa_pc_total" : 496708
     },
     {
       "jurisdiccion" : "Jujuy",
@@ -338,7 +356,9 @@ var hogarProvincia = {
       "h11_10" : 0,
       "h11_11" : 0,
       "h11_12" : 380,
-      "h11_13" : 661
+      "h11_13" : 661,
+      "usa_pc_si" : 256541,
+      "usa_pc_total" : 629692
     },
     {
       "jurisdiccion" : "La Pampa",
@@ -372,7 +392,9 @@ var hogarProvincia = {
       "h11_10" : 0,
       "h11_11" : 0,
       "h11_12" : 0,
-      "h11_13" : 741
+      "h11_13" : 741,
+      "usa_pc_si" : 169509,
+      "usa_pc_total" : 299398
     },
     {
       "jurisdiccion" : "La Rioja",
@@ -406,7 +428,9 @@ var hogarProvincia = {
       "h11_10" : 0,
       "h11_11" : 117,
       "h11_12" : 260,
-      "h11_13" : 1422
+      "h11_13" : 1422,
+      "usa_pc_si" : 157422,
+      "usa_pc_total" : 313730
     },
     {
       "jurisdiccion" : "Mendoza",
@@ -440,7 +464,9 @@ var hogarProvincia = {
       "h11_10" : 331,
       "h11_11" : 343,
       "h11_12" : 1134,
-      "h11_13" : 2607
+      "h11_13" : 2607,
+      "usa_pc_si" : 849.645,
+      "usa_pc_total" : 1627710
     },
     {
       "jurisdiccion" : "Misiones",
@@ -474,7 +500,9 @@ var hogarProvincia = {
       "h11_10" : 80,
       "h11_11" : 0,
       "h11_12" : 521,
-      "h11_13" : 1525
+      "h11_13" : 1525,
+      "usa_pc_si" : 378592,
+      "usa_pc_total" : 1031660
     },
     {
       "jurisdiccion" : "Neuquen",
@@ -508,7 +536,9 @@ var hogarProvincia = {
       "h11_10" : 51,
       "h11_11" : 20,
       "h11_12" : 76,
-      "h11_13" : 277
+      "h11_13" : 277,
+      "usa_pc_si" : 286021,
+      "usa_pc_total" : 477225
     },
     {
       "jurisdiccion" : "Rio Negro",
@@ -542,7 +572,9 @@ var hogarProvincia = {
       "h11_10" : 0,
       "h11_11" : 0,
       "h11_12" : 265,
-      "h11_13" : 1324
+      "h11_13" : 1324,
+      "usa_pc_si" : 364591,
+      "usa_pc_total" : 628096
     },
     {
       "jurisdiccion" : "Salta",
@@ -576,7 +608,9 @@ var hogarProvincia = {
       "h11_10" : 235,
       "h11_11" : 0,
       "h11_12" : 0,
-      "h11_13" : 1304
+      "h11_13" : 1304,
+      "usa_pc_si" : 499968,
+      "usa_pc_total" : 1128942
     },
     {
       "jurisdiccion" : "San Juan",
@@ -610,7 +644,9 @@ var hogarProvincia = {
       "h11_10" : 0,
       "h11_11" : 0,
       "h11_12" : 0,
-      "h11_13" : 244
+      "h11_13" : 244,
+      "usa_pc_si" : 281646,
+      "usa_pc_total" : 634328
     },
     {
       "jurisdiccion" : "San Luis",
@@ -644,7 +680,9 @@ var hogarProvincia = {
       "h11_10" : 0,
       "h11_11" : 179,
       "h11_12" : 110,
-      "h11_13" : 606
+      "h11_13" : 606,
+      "usa_pc_si" : 250366,
+      "usa_pc_total" : 405929
     },
     {
       "jurisdiccion" : "Santa Cruz",
@@ -678,7 +716,9 @@ var hogarProvincia = {
       "h11_10" : 142,
       "h11_11" : 0,
       "h11_12" : 0,
-      "h11_13" : 413
+      "h11_13" : 413,
+      "usa_pc_si" : 172826,
+      "usa_pc_total" : 248848
     },
     {
       "jurisdiccion" : "Santa Fe",
@@ -712,7 +752,9 @@ var hogarProvincia = {
       "h11_10" : 0,
       "h11_11" : 620,
       "h11_12" : 981,
-      "h11_13" : 7108
+      "h11_13" : 7108,
+      "usa_pc_si" : 1628202,
+      "usa_pc_total" : 3021189
     },
     {
       "jurisdiccion" : "Santiago del Estero",
@@ -746,7 +788,9 @@ var hogarProvincia = {
       "h11_10" : 0,
       "h11_11" : 0,
       "h11_12" : 0,
-      "h11_13" : 1018
+      "h11_13" : 1018,
+      "usa_pc_si" : 246679,
+      "usa_pc_total" : 816152
     },
     {
       "jurisdiccion" : "Tierra del Fuego",
@@ -780,7 +824,9 @@ var hogarProvincia = {
       "h11_10" : 0,
       "h11_11" : 0,
       "h11_12" : 74,
-      "h11_13" : 246
+      "h11_13" : 246,
+      "usa_pc_si" : 91916,
+      "usa_pc_total" : 117213
     },
     {
       "jurisdiccion" : "Tucuman",
@@ -814,7 +860,9 @@ var hogarProvincia = {
       "h11_10" : 242,
       "h11_11" : 0,
       "h11_12" : 0,
-      "h11_13" : 4076
+      "h11_13" : 4076,
+      "usa_pc_si" : 561639,
+      "usa_pc_total" : 1362943
     }
   ],
       getByField: function(field, returnField, valueId){
