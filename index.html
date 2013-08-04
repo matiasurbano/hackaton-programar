@@ -126,7 +126,7 @@ $("#select01").change(function () {
 
 function initialize() {
 $("#map_canvas").argenmap();
- $('#mapa').centro(-38.416097, -63.616672);
+ $('#mapa').centro(-48.416097, -63.616672);
   $('#mapa').zoom(4);
  map = $('#map_canvas').data('gmap'); //asigna el objeto mapa a la variable map
  /*   map = new google.maps.Map(document.getElementById('map_canvas'), {
@@ -134,7 +134,7 @@ $("#map_canvas").argenmap();
     zoom: 4,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   });*/
-  map.setCenter (new google.maps.LatLng(-38.416097, -63.616672));
+  map.setCenter (new google.maps.LatLng(-48.416097, -63.616672));
   map.setZoom(4);
   layer = new google.maps.FusionTablesLayer();
     layer.setOptions({
@@ -179,7 +179,7 @@ $("#map_canvas").argenmap();
 
   });
   layer.setMap(map);
-  map.setCenter (new google.maps.LatLng(-38.416097, -63.616672));
+  map.setCenter (new google.maps.LatLng(-48.416097, -63.616672));
   map.setZoom(4);
 
   });
