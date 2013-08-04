@@ -51,8 +51,8 @@
   </head>
 
   <body id="top" data-spy="scroll" data-target=".subnav" data-offset="80" onload="initialize(); " style="margin-top: 40px;">
-     <script src="js/bsa.js"></script>
-
+     <script type="text/javascript" src="js/bsa.js"></script>
+     <script type="text/javascript" src="js/hogarProvincia.js"></script>	
 
 
   <!-- Navbar
@@ -86,7 +86,7 @@
     <label class="control-label" for="select01">Select list</label>
     <div class="controls">
     <select id="select01">
-    <option>something</option>
+    <option>1</option>
     <option>2</option>
     <option>3</option>
     <option>4</option>
@@ -112,7 +112,9 @@ var map;
 var layer;
 var tableid =  "14iHz800h6FbXgdQOzqcYrIvTHMoHUV2nZsmq1rM"; //1265695;
 
-
+$("#select01").change(function () {
+console.log( "hola");
+});
 
 function initialize() {
     geocoder = new google.maps.Geocoder();
