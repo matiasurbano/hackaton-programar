@@ -51,6 +51,7 @@
   </head>
 
   <body id="top" data-spy="scroll" data-target=".subnav" data-offset="80" onload="initialize(); " style="margin-top: 40px;">
+        <script src="js/underscore-min.js"></script>
      <script type="text/javascript" src="js/bsa.js"></script>
      <script type="text/javascript" src="js/hogarProvincia.js"></script>	
 
@@ -100,6 +101,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
     <script src="js/jquery.smooth-scroll.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/bootswatch.js"></script>    <script type="text/javascript" src="http://www.google.com/jsapi"></script>        
@@ -136,13 +138,15 @@ function initialize() {
   layer.setMap(map);
   
   google.maps.event.addListener(layer, 'click', function(e){
-      console.log(e);
-
-  });
+      console.log(getProvinciaValue(e));
+     /* console.log(hogarProvincia.getByField(getProvinciaValue(e), "h7", hogarProvincia.jurisdiccion));*/
+ });
 
 }
-     
-{
+
+function getProvinciaValue(e){ 
+  return e.row.provincia.value;
+}     
 
 function changeMap() {
   var searchString = document.getElementById('searchString').value.replace("'", "\\'");
@@ -180,10 +184,9 @@ function changeMap2() {
   
 }
 
-}
 
 
-  var infowindow = new google.maps.InfoWindow();
+var infowindow = new google.maps.InfoWindow();
     
 
 
@@ -243,9 +246,6 @@ if (response.isError()) {
 
 
         </script>
-
-
-
 
   </body>
 </html>
