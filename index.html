@@ -1,180 +1,280 @@
+
 <!DOCTYPE html>
-<!-- saved from url=(0053)http://leafletjs.com/examples/choropleth-example.html -->
-<html style=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Leaflet Layers Control Example</title>
-	<meta charset="utf-8">
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Análisis geolocalizado de las TIC</title>
+    <style>
+            #map_canvas { 
+              width: 100%; height: 800px; 
+            }
+    
+            .container_map{
+               width: 60%;
+               float: left;
+            }
 
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+            .control-group{
+              float:left;
+              width: 35%;
+              margin-left: 20px;
+            }
 
-	<link rel="stylesheet" href="http://leafletjs.com/dist/leaflet.css">
-	<!--[if lte IE 8]><link rel="stylesheet" href="../dist/leaflet.ie.css" /><![endif]-->
+        	  .container_grafico{
+        	    width: 100%;
+        	  }
 
-	<style>
-		#map {
-			width: 800px;
-			height: 500px;
-		}
+            .select01 {
+              width : 283px;
+            }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mini and minimalist.">
+    <meta name="author" content="Thomas Park">
 
-		.info {
-			padding: 6px 8px;
-			font: 14px/16px Arial, Helvetica, sans-serif;
-			background: white;
-			background: rgba(255,255,255,0.8);
-			box-shadow: 0 0 15px rgba(0,0,0,0.2);
-			border-radius: 5px;
-		}
-		.info h4 {
-			margin: 0 0 5px;
-			color: #777;
-		}
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
-		.legend {
-			text-align: left;
-			line-height: 18px;
-			color: #555;
-		}
-		.legend i {
-			width: 18px;
-			height: 18px;
-			float: left;
-			margin-right: 8px;
-			opacity: 0.7;
-		}
-	</style>
-</head>
-<body screen_capture_injected="true" class="">
-	<div id="map"></div>
-
-	<script src="js/vendor/leaflet.js"></script>
-	<script src="js/vendor/underscore-min.js"></script>
-
-	<script type="text/javascript" src="js/us-states.js"></script>
-	<script type="text/javascript" src="js/provincias.js"></script>
-	<script type="text/javascript">
-
-		var map = L.map('map').setView([37.8, -96], 4);
-
-		var cloudmade = L.tileLayer('http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png', {
-			attribution: 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade',
-			key: 'BC9A493B41014CAABB98F0471D759707',
-			styleId: 22677
-		}).addTo(map);
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/bootswatch.css" rel="stylesheet">
 
 
-		// control that shows state info on hover
-		var info = L.control();
+  </head>
 
-		info.onAdd = function (map) {
-			this._div = L.DomUtil.create('div', 'info');
-			this.update();
-			return this._div;
-		};
+  <body id="top" data-spy="scroll" data-target=".subnav" data-offset="80" onload="initialize(); " style="margin-top: 40px;">
+        <script src="js/underscore-min.js"></script>
+     <script type="text/javascript" src="js/bsa.js"></script>
+     <script type="text/javascript" src="js/hogarProvincia.js"></script>
+     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+     <script type="text/javascript" src="js/graficos.js"></script>	
+ 
+  <!-- Navbar
+    ================================================== -->
+ <div class="navbar navbar-fixed-top">
+   <div class="navbar-inner">
+     <div class="container">
+       <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+       </a>
+       <a class="brand" href="../">Análisis geolocalizado de las TIC</a>
+       <div class="nav-collapse collapse" id="main-menu">
+        <ul class="nav" id="main-menu-left">
+          <li><a onclick="pageTracker._link(this.href); return false;" href="http://news.bootswatch.com">Mapa</a></li>
+          <li><a onclick="pageTracker._link(this.href); return false;" href="http://news.bootswatch.com">Descargar App</a></li>
+          
+        </ul>
 
-		info.update = function (props) {
-			this._div.innerHTML = '<h4>US Population Density</h4>' +  (props ?
-				'<b>' + props.name + '</b><br />' + props.density + ' people / mi<sup>2</sup>'
-				: 'Hover over a state');
-		};
+       </div>
+     </div>
+   </div>
+ </div>
 
-		info.addTo(map);
+  <div class="container_map">
+    <div id="map_canvas"></div>
 
+    </div><!-- /container -->
+   <div class="control-group" style="display: none;" id="datosSeleccion">
+    <h1><div id="nombreProvincia"></div></h1>
+    <label class="control-label" for="select01"><h2>Datos por hogar de:<h2></label>
+    <div class="controls">
+      <select class="select01" id="select01">
+        <option value="h6_1">Lineas de celular activas</option>
+        <option value="h8_a">Computadoras de escritorio</option>
+        <option value="h8_b">Computadoras portátiles</option>
+        <option value="h11">Razones por las cuales no hay internet</option>
+      </select>
+    </div>
 
-		// get color depending on population density value
-		function getColor(d) {
-			return d > 1000 ? '#800026' :
-			       d > 500  ? '#BD0026' :
-			       d > 200  ? '#E31A1C' :
-			       d > 100  ? '#FC4E2A' :
-			       d > 50   ? '#FD8D3C' :
-			       d > 20   ? '#FEB24C' :
-			       d > 10   ? '#FED976' :
-			                  '#FFEDA0';
-		}
-
-		function style(feature) {
-			return {
-				weight: 2,
-				opacity: 1,
-				color: 'white',
-				dashArray: '3',
-				fillOpacity: 0.7,
-				fillColor: getColor(feature.properties.density)
-			};
-		}
-
-		function highlightFeature(e) {
-			var layer = e.target;
-
-			layer.setStyle({
-				weight: 5,
-				color: '#666',
-				dashArray: '',
-				fillOpacity: 0.7
-			});
-
-			if (!L.Browser.ie && !L.Browser.opera) {
-				layer.bringToFront();
-			}
-
-			info.update(layer.feature.properties);
-		}
-
-		var geojson;
-
-		function resetHighlight(e) {
-			geojson.resetStyle(e.target);
-			info.update();
-		}
-
-		function zoomToFeature(e) {
-			map.fitBounds(e.target.getBounds());
-		}
-
-		function onEachFeature(feature, layer) {
-			layer.on({
-				mouseover: highlightFeature,
-				mouseout: resetHighlight,
-				click: zoomToFeature
-			});
-		}
-
-		geojson = L.geoJson(provinciasJSON, {
-			style: style,
-			onEachFeature: onEachFeature
-		}).addTo(map);
-
-		// geojson = L.geoJson(statesData, {
-		// 	style: style,
-		// 	onEachFeature: onEachFeature
-		// }).addTo(map);
-
-		
+    <div id="grafico_div" class="container_grafico" style="display: none;"></div>
+    <a class="btn btn-info btn-large" id="volver">Volver &lt;&lt;</a>
+  </div>
 
 
-		var legend = L.control({position: 'bottomright'});
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://www.ign.gob.ar/argenmap/argenmap.jquery.min.js"></script>
+    <script src="js/jquery.smooth-scroll.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootswatch.js"></script>    <script type="text/javascript" src="http://www.google.com/jsapi"></script>        
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="http://geoxml3.googlecode.com/svn/branches/polys/geoxml3.js"></script>
+<script type="text/javascript">
+  google.load('visualization', '1', {'packages':['corechart', 'table', 'geomap']});
+var map;
 
-		legend.onAdd = function (map) {
+var layer;
+var tableid =  "14iHz800h6FbXgdQOzqcYrIvTHMoHUV2nZsmq1rM"; //1265695;
+var prov_actual;
 
-			var div = L.DomUtil.create('div', 'info legend'),
-				grades = [0, 10, 20, 50, 100, 200, 500, 1000],
-				labels = [],
-				from, to;
+$("#select01").change(function () {
+  var value = "";
+  $( "#select01 option:selected" ).each(function() {
+    value = $( this ).val();
+  });
+  if (prov_actual){
+    graficar (value, prov_actual);
+  }
+});
 
-			for (var i = 0; i < grades.length; i++) {
-				from = grades[i];
-				to = grades[i + 1];
 
-				labels.push(
-					'<i style="background:' + getColor(from + 1) + '"></i> ' +
-					from + (to ? '&ndash;' + to : '+'));
-			}
+function initialize() {
+$("#map_canvas").argenmap();
+ $('#mapa').centro(-45.416097, -63.616672);
+  $('#mapa').zoom(4);
+ map = $('#map_canvas').data('gmap'); //asigna el objeto mapa a la variable map
+ /*   map = new google.maps.Map(document.getElementById('map_canvas'), {
+    center: new google.maps.LatLng(-38.416097, -63.616672),
+    zoom: 4,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  });*/
+  map.setCenter (new google.maps.LatLng(-45.416097, -63.616672));
+  map.setZoom(4);
+  layer = new google.maps.FusionTablesLayer();
+    layer.setOptions({
+        query: {
+                select: 'geometry',
+                from: tableid
+               },
+    suppressInfoWindows:true
 
-			div.innerHTML = labels.join('<br>');
-			return div;
-		};
+  });
+  layer.setMap(map);
 
-		legend.addTo(map);
 
-	</script>
+  
+  google.maps.event.addListener(layer, 'click', function(e){
 
-</body></html>
+      $('#nombreProvincia').text(getProvinciaValue(e));
+      $('#datosSeleccion').show();
+      $('#grafico_div').show();  
+
+      prov_actual = getProvinciaValue(e);
+      $( "#select01 option:selected" ).each(function() {
+        value = $( this ).val();
+      });
+      graficar (value, prov_actual);
+      changeMap(prov_actual);
+ });
+
+
+
+
+}
+
+ google.maps.event.addDomListener(document.getElementById('volver'), 'click', function() {
+    layer.setMap(null);
+    layer.setOptions({
+        query: {
+                select: 'geometry',
+                from: tableid
+               },
+    suppressInfoWindows:true
+
+  });
+  layer.setMap(map);
+  map.setCenter (new google.maps.LatLng(-45.416097, -63.616672));
+  map.setZoom(4);
+
+  });
+
+function getProvinciaValue(e){ 
+  return e.row.provincia.value;
+}     
+
+function changeMap(provincia) {
+
+  if(provincia == "") {
+    //var query="SELECT 'geometry' FROM " + tableid;
+  } else {
+    var query="SELECT 'geometry' FROM " + tableid + " WHERE provincia = '" + provincia + "'";
+
+  layer.setOptions({
+    query: {
+            select: 'geometry',
+            from: tableid,
+            where:" provincia = '" + prov_actual + "'"
+           }
+
+    });
+    
+      
+  }
+
+  layer.setMap(map);
+  zoom2query(query);
+
+}
+
+
+
+var infowindow = new google.maps.InfoWindow();
+    
+
+
+function zoom2query(query) {
+// zoom and center map on query results
+  //set the query using the parameter
+  var queryText = encodeURIComponent(query);
+  var query = new google.visualization.Query('http://www.google.com/fusiontables/gvizdata?tq='  + queryText);
+
+
+  //set the callback function
+  query.send(zoomTo);
+
+}
+
+function zoomTo(response) {
+if (!response) {
+  alert('no response');
+  return;
+}
+if (response.isError()) {
+  alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+  return;
+} 
+  FTresponse = response;
+  //for more information on the response object, see the documentation
+  //http://code.google.com/apis/visualization/documentation/reference.html#QueryResponse
+  numRows = response.getDataTable().getNumberOfRows();
+  numCols = response.getDataTable().getNumberOfColumns();
+  
+     var kml =  FTresponse.getDataTable().getValue(0,0);
+     //console.log(kml);
+     // create a geoXml3 parser for the click handlers
+     var geoXml = new geoXML3.parser({
+                    map: map,
+        zoom: false
+                });
+
+     geoXml.parseKmlString("<Placemark>"+kml+"</Placemark>");
+
+     geoXml.docs[0].gpolygons[0].setMap(null);
+     map.fitBounds(geoXml.docs[0].gpolygons[0].bounds);
+
+
+ /* var bounds = new google.maps.LatLngBounds();
+  for(i = 0; i < numRows; i++) {
+      var point = new google.maps.LatLng(
+          parseFloat(response.getDataTable().getValue(i, 0)),
+          parseFloat(response.getDataTable().getValue(i, 1)));
+      bounds.extend(point);
+  }
+  // zoom to the bounds
+  map.fitBounds(bounds);*/
+
+}
+
+
+
+        </script>
+
+  </body>
+</html>
+
