@@ -21,7 +21,7 @@ function graficar (columna, provincia) {
 function lineas_activas (provincia) {
         var data = google.visualization.arrayToDataTable([
           ['Lineas', 'Hogares'],
-          ['Ninguna PC', hogarProvincia.getByField("jurisdiccion","h6_1_1",provincia)],
+          ['1 linea', hogarProvincia.getByField("jurisdiccion","h6_1_1",provincia)],
           ['2 lineas', hogarProvincia.getByField("jurisdiccion","h6_1_2",provincia)],
           ['3 lineas', hogarProvincia.getByField("jurisdiccion","h6_1_3",provincia)],
           ['4 lineas', hogarProvincia.getByField("jurisdiccion","h6_1_4",provincia)],
