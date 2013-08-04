@@ -134,8 +134,8 @@ $("#map_canvas").argenmap();
     zoom: 4,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   });*/
-
-  
+  map.setCenter (new google.maps.LatLng(-38.416097, -63.616672));
+  map.setZoom(4);
   layer = new google.maps.FusionTablesLayer();
     layer.setOptions({
         query: {
