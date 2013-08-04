@@ -14,11 +14,13 @@
              float: left;
           }
 
-          .control-group{
-            float:left;
-	    width: 35%;
+        .control-group{
+          float:left;
+          width: 35%;
 
-          }
+          margin-left: 20px;
+
+        }
 
 	  .container_grafico{
 	    width: 100%;
@@ -37,21 +39,6 @@
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/bootswatch.css" rel="stylesheet">
 
-   <script type="text/javascript">
-
-     var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-23019901-1']);
-      _gaq.push(['_setDomainName', "bootswatch.com"]);
-        _gaq.push(['_setAllowLinker', true]);
-      _gaq.push(['_trackPageview']);
-
-     (function() {
-       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-     })();
-
-   </script>
 
   </head>
 
@@ -89,8 +76,9 @@
     <div id="map_canvas"></div>
 
     </div><!-- /container -->
-   <div class="control-group">
-    <label class="control-label" for="select01">Datos por hogar de:</label>
+   <div class="control-group" style="display: none;" id="datosSeleccion">
+    <h1><div id="nombreProvincia"></div></h1>
+    <label class="control-label" for="select01"><h2>Datos por hogar de:<h2></label>
     <div class="controls">
       <select id="select01">
         <option value="h6_1">Lineas de celular activas</option>
@@ -99,7 +87,9 @@
         <option value="h11">Razones por las cuales no hay internet</option>
       </select>
     </div>
-    <div class="container_grafico" id="grafico_div"></div>
+
+    <div id="grafico_div" class="container_grafico" style="display: none;"></div>
+
   </div>
 
 
@@ -154,11 +144,16 @@ function initialize() {
   google.maps.event.addListener(layer, 'click', function(e){
       console.log(getProvinciaValue(e));
       console.log(hogarProvincia.getByField(getProvinciaValue(e), "h7", hogarProvincia.jurisdiccion));
+      $('#nombreProvincia').text(getProvinciaValue(e));
+      $('#datosSeleccion').show();
+      $('#grafico_div').show();  
+
       prov_actual = getProvinciaValue(e);
       $( "#select01 option:selected" ).each(function() {
         value = $( this ).val();
       });
       graficar (value, prov_actual);
+      changeMap(prov_actual);
  });
 
 }
@@ -167,18 +162,18 @@ function getProvinciaValue(e){
   return e.row.provincia.value;
 }     
 
-function changeMap() {
-  var searchString = document.getElementById('searchString').value.replace("'", "\\'");
-  if(searchString == "") {
+function changeMap(provincia) {
+
+  if(provincia == "") {
     //var query="SELECT 'geometry' FROM " + tableid;
   } else {
-    var query="SELECT 'geometry' FROM " + tableid + " WHERE name = '" + searchString + "'";
+    var query="SELECT 'geometry' FROM " + tableid + " WHERE provincia = '" + provincia + "'";
 
   layer.setOptions({
     query: {
             select: 'geometry',
             from: tableid,
-            where:" name = '" + searchString + "'"
+            where:" provincia = '" + prov_actual + "'"
            }
 
     });
@@ -189,18 +184,6 @@ function changeMap() {
   layer.setMap(map);
   zoom2query(query);
 
-}
-
-function changeMap2() {
-  var searchString2 = document.getElementById('searchString2').value.replace("'", "\\'");
-  if(searchString2 == "") {
-    var query="SELECT 'geometry' FROM " + tableid2;
-  } else {
-    var query="SELECT 'geometry' FROM " + tableid2 + " WHERE 'name' = '" + searchString2 + "'";
-  }
-  //layer2.setQuery(query);
-  zoom2query(query);
-  
 }
 
 
@@ -237,6 +220,7 @@ if (response.isError()) {
   numCols = response.getDataTable().getNumberOfColumns();
   
      var kml =  FTresponse.getDataTable().getValue(0,0);
+     //console.log(kml);
      // create a geoXml3 parser for the click handlers
      var geoXml = new geoXML3.parser({
                     map: map,
@@ -244,7 +228,7 @@ if (response.isError()) {
                 });
 
      geoXml.parseKmlString("<Placemark>"+kml+"</Placemark>");
-     //console.log(kml);
+     console.log(kml);
      geoXml.docs[0].gpolygons[0].setMap(null);
      console.log(geoXml.docs[0].gpolygons[0].bounds);
      map.fitBounds(geoXml.docs[0].gpolygons[0].bounds);
