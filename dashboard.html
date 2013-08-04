@@ -9,8 +9,13 @@
               width: 100%; height: 800px; 
             }
     
-          .container_joel{
-             margin-right: 500px;
+          .container_map{
+             width: 60%;
+             float: left;
+          }
+
+          .control-group{
+            float:left;
 
           }
     </style>
@@ -45,7 +50,7 @@
 
   </head>
 
-  <body id="top" data-spy="scroll" data-target=".subnav" data-offset="80" onload="initialize();">
+  <body id="top" data-spy="scroll" data-target=".subnav" data-offset="80" onload="initialize(); " style="margin-top: 40px;">
      <script src="js/bsa.js"></script>
 
 
@@ -73,22 +78,22 @@
    </div>
  </div>
 
-    <div class="container_joel">
-      <div id="map_canvas"></div>
-      <!--Load the AJAX API-->
-
-
-
-<br><br><br><br>
-
-     <!-- Footer
-      ================================================== -->
-      <hr>
-
-   
+  <div class="container_map">
+    <div id="map_canvas"></div>
 
     </div><!-- /container -->
-
+   <div class="control-group">
+    <label class="control-label" for="select01">Select list</label>
+    <div class="controls">
+    <select id="select01">
+    <option>something</option>
+    <option>2</option>
+    <option>3</option>
+    <option>4</option>
+    <option>5</option>
+    </select>
+    </div>
+  </div>
 
 
     <!-- Le javascript
