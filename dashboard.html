@@ -53,9 +53,10 @@
   <body id="top" data-spy="scroll" data-target=".subnav" data-offset="80" onload="initialize(); " style="margin-top: 40px;">
         <script src="js/underscore-min.js"></script>
      <script type="text/javascript" src="js/bsa.js"></script>
-     <script type="text/javascript" src="js/hogarProvincia.js"></script>	
-
-
+     <script type="text/javascript" src="js/hogarProvincia.js"></script>
+     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+     <script type="text/javascript" src="js/graficos.js"></script>	
+ 
   <!-- Navbar
     ================================================== -->
  <div class="navbar navbar-fixed-top">
@@ -84,16 +85,16 @@
 
     </div><!-- /container -->
    <div class="control-group">
-    <label class="control-label" for="select01">Select list</label>
+    <label class="control-label" for="select01">Datos por hogar de:</label>
     <div class="controls">
-    <select id="select01">
-    <option>1</option>
-    <option>2</option>
-    <option>3</option>
-    <option>4</option>
-    <option>5</option>
-    </select>
+      <select id="select01">
+        <option value="h6_1">Lineas de celular activas</option>
+        <option value="h8_a">Computadoras de escritorio</option>
+        <option value="h8_b">Computadoras portátiles</option>
+        <option value="h11">Razones por las cuales no hay internet</option>
+      </select>
     </div>
+    <div id="grafico_div"></div>
   </div>
 
 
@@ -115,8 +116,13 @@ var layer;
 var tableid =  "14iHz800h6FbXgdQOzqcYrIvTHMoHUV2nZsmq1rM"; //1265695;
 
 $("#select01").change(function () {
-console.log( "hola");
+  var value = "";
+  $( "#select01 option:selected" ).each(function() {
+    value = $( this ).val();
+  });
+  graficar (value);
 });
+
 
 function initialize() {
     geocoder = new google.maps.Geocoder();
