@@ -817,11 +817,11 @@ var hogarProvincia = {
       "h11_13" : 4076
     }
   ],
-      getByField: function(field,returnField, valueId){
+      getByField: function(field, returnField, valueId){
         return _.filter(this.rows,function(v){ 
             return  (v[field]==valueId);
         })[0][returnField];
-}
+      }
 }
 
 
@@ -831,9 +831,9 @@ var hogarProvincia = {
 // getByField   ( valor clave, campo q devuelve , VALOR A BUSCAR)
 // 
 
-// _.each(hogarProvincia.rows,function(prov){
-//       console.log(
-//             prov.jurisdiccion+ " - " + hogarProvincia.getByField("jurisdiccion","h7",prov.jurisdiccion)
-//       )
+/* _.each(hogarProvincia.rows,function(prov){
+       console.log(
+             prov.jurisdiccion+ " - " + hogarProvincia.getByField("jurisdiccion","h7",prov.jurisdiccion)
+       )
 
-// })
+ })*/
