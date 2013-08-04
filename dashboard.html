@@ -89,7 +89,7 @@
     </div>
 
     <div id="grafico_div" class="container_grafico" style="display: none;"></div>
-    <a class="btn" id="volver">Volver &lt;&lt;</a>
+    <a class="btn btn-info btn-large" id="volver">Volver &lt;&lt;</a>
   </div>
 
 
@@ -97,7 +97,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-
+<script type="text/javascript" src="http://www.ign.gob.ar/argenmap/argenmap.jquery.min.js"></script>
     <script src="js/jquery.smooth-scroll.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/bootswatch.js"></script>    <script type="text/javascript" src="http://www.google.com/jsapi"></script>        
@@ -123,12 +123,16 @@ $("#select01").change(function () {
 
 
 function initialize() {
-    geocoder = new google.maps.Geocoder();
-    map = new google.maps.Map(document.getElementById('map_canvas'), {
+$("#map_canvas").argenmap();
+ $('#mapa').centro(-38.416097, -63.616672);
+  $('#mapa').zoom(4);
+ map = $('#map_canvas').data('gmap'); //asigna el objeto mapa a la variable map
+ /*   map = new google.maps.Map(document.getElementById('map_canvas'), {
     center: new google.maps.LatLng(-38.416097, -63.616672),
     zoom: 4,
     mapTypeId: google.maps.MapTypeId.ROADMAP
-  });
+  });*/
+
   
   layer = new google.maps.FusionTablesLayer();
     layer.setOptions({
