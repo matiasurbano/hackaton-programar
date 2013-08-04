@@ -114,13 +114,16 @@ var map;
 
 var layer;
 var tableid =  "14iHz800h6FbXgdQOzqcYrIvTHMoHUV2nZsmq1rM"; //1265695;
+var prov_actual;
 
 $("#select01").change(function () {
   var value = "";
   $( "#select01 option:selected" ).each(function() {
     value = $( this ).val();
   });
-  graficar (value);
+  if (prov_actual){
+    graficar (value, prov_actual);
+  }
 });
 
 
@@ -146,6 +149,11 @@ function initialize() {
   google.maps.event.addListener(layer, 'click', function(e){
       console.log(getProvinciaValue(e));
       console.log(hogarProvincia.getByField(getProvinciaValue(e), "h7", hogarProvincia.jurisdiccion));
+      prov_actual = getProvinciaValue(e);
+      $( "#select01 option:selected" ).each(function() {
+        value = $( this ).val();
+      });
+      graficar (value, prov_actual);
  });
 
 }

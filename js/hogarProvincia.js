@@ -171,7 +171,7 @@ var hogarProvincia = {
       "h11_13" : 10575
     },
     {
-      "jurisdiccion" : "Córdoba",
+      "jurisdiccion" : "Cordoba",
       "h6" : 846244,
       "h6_1_1" : 297265,
       "h6_1_2" : 320581,
