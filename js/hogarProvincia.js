@@ -239,7 +239,7 @@ var hogarProvincia = {
       "h11_13" : 2865
     },
     {
-      "jurisdiccion" : "Entre Ríos",
+      "jurisdiccion" : "Entre Rios",
       "h6" : 278612,
       "h6_1_1" : 106854,
       "h6_1_2" : 104500,
@@ -477,7 +477,7 @@ var hogarProvincia = {
       "h11_13" : 1525
     },
     {
-      "jurisdiccion" : "Neuquén",
+      "jurisdiccion" : "Neuquen",
       "h6" : 139330,
       "h6_1_1" : 45716,
       "h6_1_2" : 50978,
@@ -511,7 +511,7 @@ var hogarProvincia = {
       "h11_13" : 277
     },
     {
-      "jurisdiccion" : "Río Negro",
+      "jurisdiccion" : "Rio Negro",
       "h6" : 120835,
       "h6_1_1" : 38796,
       "h6_1_2" : 48045,
@@ -783,7 +783,7 @@ var hogarProvincia = {
       "h11_13" : 246
     },
     {
-      "jurisdiccion" : "Tucumán",
+      "jurisdiccion" : "Tucuman",
       "h6" : 278286,
       "h6_1_1" : 103277,
       "h6_1_2" : 102684,

@@ -12,7 +12,7 @@ function graficar (columna, provincia) {
 		computadora_portatil(provincia);
 	  break;
 	  case "h11":
-		computadora_portatil(provincia);
+		no_internet_fija(provincia);
 	  break;
 
 	}
@@ -42,7 +42,7 @@ function computadora_escritorio (provincia) {
           ['Ninguna PC', hogarProvincia.getByField("jurisdiccion","h8_a_0",provincia)],
           ['1 PC', hogarProvincia.getByField("jurisdiccion","h8_a_1",provincia)],
           ['2 PCs', hogarProvincia.getByField("jurisdiccion","h8_a_2",provincia)],
-          ['3 PCs o mas', hogarProvincia.getByField("jurisdiccion","h8_a_3",provincia)],
+          ['3 PCs o mas', hogarProvincia.getByField("jurisdiccion","h8_a_3",provincia)]
         ]);
 
 	var options = {
@@ -59,7 +59,7 @@ function computadora_portatil (provincia) {
           ['Ninguna PC portátil', hogarProvincia.getByField("jurisdiccion","h8_b_0",provincia)],
           ['1 PC portátil', hogarProvincia.getByField("jurisdiccion","h8_b_1",provincia)],
           ['2 PCs portátiles', hogarProvincia.getByField("jurisdiccion","h8_b_2",provincia)],
-          ['3 PCs o mas portátiles', hogarProvincia.getByField("jurisdiccion","h8_b_3",provincia)],
+          ['3 PCs o mas portátiles', hogarProvincia.getByField("jurisdiccion","h8_b_3",provincia)]
         ]);
 
 	var options = {
@@ -70,17 +70,27 @@ function computadora_portatil (provincia) {
         grafico.draw(data, options);
 }
 
-function computadora_portatil (provincia) {
+function no_internet_fija (provincia) {
         var data = google.visualization.arrayToDataTable([
-          ['Motivos porlos cuales no tienen internet fija', 'Hogares'],
-          ['Motivos económicos', hogarProvincia.getByField("jurisdiccion","h8_b_0",provincia)],
-          ['No lo necesitan o no les interesa', hogarProvincia.getByField("jurisdiccion","h8_b_1",provincia)],
-          ['2 PCs portátiles', hogarProvincia.getByField("jurisdiccion","h8_b_2",provincia)],
-          ['3 PCs o mas portátiles', hogarProvincia.getByField("jurisdiccion","h8_b_3",provincia)],
+          ['Motivos', 'Hogares'],
+          ['Motivos económicos', hogarProvincia.getByField("jurisdiccion","h11_1",provincia)],
+          ['No lo necesitan o no les interesa', hogarProvincia.getByField("jurisdiccion","h11_2",provincia)],
+          ['No sabe usarlo', hogarProvincia.getByField("jurisdiccion","h11_3",provincia)],
+          ['No llega el servicio', hogarProvincia.getByField("jurisdiccion","h11_4",provincia)],
+	  ['Accede a internet Móvil', hogarProvincia.getByField("jurisdiccion","h11_5",provincia)],
+          ['Limitaciones/problemas de la empresa proveedora', hogarProvincia.getByField("jurisdiccion","h11_6",provincia)],
+          ['Espera tener en el corto plazo', hogarProvincia.getByField("jurisdiccion","h11_7",provincia)],
+          ['Robo o miedo al robo del equipamento', hogarProvincia.getByField("jurisdiccion","h11_8",provincia)],
+          ['Mudanza', hogarProvincia.getByField("jurisdiccion","h11_9",provincia)],
+          ['Seguridad y cuidado de los menores', hogarProvincia.getByField("jurisdiccion","h11_10",provincia)],
+          ['Limitaciones de tiempo de los integrantes del hogar', hogarProvincia.getByField("jurisdiccion","h11_11",provincia)],
+          ['Accede en otro lugar', hogarProvincia.getByField("jurisdiccion","h11_12",provincia)],
+          ['Otro Motivo', hogarProvincia.getByField("jurisdiccion","h11_13",provincia)],
+          ['NS/NC', hogarProvincia.getByField("jurisdiccion","h11_99",provincia)]
         ]);
 
 	var options = {
-          title: 'Computadoras portátiles por hogar'
+          title: 'Motivos por los cuales no hay internet fija por hogar'
         };
 
         var grafico = new google.visualization.PieChart(document.getElementById('grafico_div'));
